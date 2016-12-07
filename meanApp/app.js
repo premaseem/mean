@@ -8,13 +8,9 @@ var server = app.listen(app.get('port'),function(){
 
 app.get('/', function(req, res){
     console.log("get the home page or Root ");
-
+res.status(404).send("Welcome to mean app").status(404)
 })
 
-app.get('/prem', function(req, res){
-    console.log("get the home page ");
-
-})
 
 
 console.log("last line of file ")
