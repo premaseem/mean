@@ -1,4 +1,5 @@
 var express = require('express')
+var path = require('path');
 var app = express()
 app.set('port',3000)
 
@@ -8,9 +9,18 @@ var server = app.listen(app.get('port'),function(){
 
 app.get('/', function(req, res){
     console.log("get the home page or Root ");
-res.status(404).send("Welcome to mean app").status(404)
+res.status(200).send("Welcome to mean app").status(404)
+})
+
+app.get('/json', function(req, res){
+    console.log("get the home page or Root ");
+    res.status(200).json({"json":"value"})
 })
 
 
+app.get('/file', function(req, res){
+    console.log("get the home page or Root ");
+    res.sendFile(path.join(__dirname + '/app.js'));
+})
 
 console.log("last line of file ")
