@@ -1,0 +1,21 @@
+{
+  "name": "mean-app",
+  "version": "1.0.0",
+  "description": "Mean application poc",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/premaseem/mean"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  }
+}
