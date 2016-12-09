@@ -9,7 +9,7 @@ var server = app.listen(app.get('port'),function(){
 
 app.get('/', function(req, res){
     console.log("get the home page or Root ");
-res.status(200).send("Welcome to mean app").status(404)
+res.status(200).sendFile(path.join(__dirname,'public','index.html'))
 })
 
 app.get('/json', function(req, res){
