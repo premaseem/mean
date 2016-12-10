@@ -5,12 +5,11 @@
 var express = require('express')
 var router = express.Router();
 
+var ctrlHotels = require('../controllers/hotels.controllers')
+
 router
-    .route('/json')
-.get(function(req, res){
-        console.log("get the home page or Root ");
-        res.status(200).json({"json":req.method})
-    })
+    .route('/hotels')
+.get(ctrlHotels.hotelsGetAll)
 .post(function(req, res){
         console.log("get the home page or Root ");
         res.status(200).json({"json":req.method})
