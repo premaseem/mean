@@ -9,10 +9,10 @@ var ctrlHotels = require('../controllers/hotels.controllers')
 
 router
     .route('/hotels')
-.get(ctrlHotels.hotelsGetAll)
-.post(function(req, res){
-        console.log("get the home page or Root ");
-        res.status(200).json({"json":req.method})
-    });
+.get(ctrlHotels.hotelsGetAll);
+
+router.route('/hotels/:hotelId')
+    .get(ctrlHotels.hotelsGetOne);
+
 
 module.exports = router
