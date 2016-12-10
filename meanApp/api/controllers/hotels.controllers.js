@@ -33,7 +33,7 @@ module.exports.hotelsGetOne = function(req,res){
 }
 
 module.exports.hotelsAddOne = function(req, res) {
-    console.log("POST new hotel");
+    console.log("POST new hotel and node mon ");
     console.log(req.body);
     res
         .status(200)
