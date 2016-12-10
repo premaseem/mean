@@ -1,24 +1,30 @@
-var express = require('express')
+var express = require('express');
+var app = express();
 var path = require('path');
-var routes = require('./api/route')
+var bodyParser = require('body-parser');
 
-var app = express()
-app.set('port',3000)
+var routes = require('./api/route');
 
-app.use(function(req,res,next){
-    console.log(req.method,req.url);
+// Define the port to run on
+app.set('port', 3000);
+
+// Add middleware to console log every request
+app.use(function(req, res, next) {
+    console.log(req.method, req.url);
     next();
 });
-app.use('/api',routes);
-app.use(express.static(path.join(__dirname,'public')));
 
-app.get('/file', function(req, res){
-    console.log("get the home page or Root ");
-    res.sendFile(path.join(__dirname + '/app.js'));
-})
+// Set static directory before defining routes
+app.use(express.static(path.join(__dirname, 'public')));
 
-var server = app.listen(app.get('port'),function(){
-    console.log("app started on port "+ server.address().port)
-})
+// Enable parsing of posted forms
+app.use(bodyParser.urlencoded({ extended: false }));
 
-console.log("last line of file ")
+// Add some routing
+app.use('/api', routes);
+
+// Listen for requests
+var server = app.listen(app.get('port'), function() {
+    var port = server.address().port;
+    console.log('Magic happens on port ' + port);
+});
