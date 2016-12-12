@@ -21,9 +21,9 @@ module.exports.hotelsGetAll = function(req,res) {
     if (req.query && req.query.count) {
         count = parseInt(req.query.count,10);
     }
-    //var returnData = hotelData.slice(offset,offset+count)
+
     var db = dbconn.get();
-    docs = db.collection('hotels').find().limit(count).toArray(function(err,returnDoc){
+    docs = db.collection('hotels').find().skip(offset).limit(count).toArray(function(err,returnDoc){
        if(err){
            cosole.log("Error in collections ");
            return
