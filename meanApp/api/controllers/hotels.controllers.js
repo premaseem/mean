@@ -1,10 +1,15 @@
 /**
  * Created by asee2278 on 12/9/16.
  */
+var dbconn = require('../data/dbconnection.js')
 var hotelData = require('../data/hotel-data.json')
 
+
 module.exports.hotelsGetAll = function(req,res) {
+
+
     console.log('get all hotels')
+
     console.log(req.query)
     var offset = 1;
     var count = 2;
@@ -16,9 +21,18 @@ module.exports.hotelsGetAll = function(req,res) {
     if (req.query && req.query.count) {
         count = parseInt(req.query.count,10);
     }
-    var returnData = hotelData.slice(offset,offset+count)
+    //var returnData = hotelData.slice(offset,offset+count)
+    var db = dbconn.get();
+    docs = db.collection('hotels').find().limit(count).toArray(function(err,returnDoc){
+       if(err){
+           cosole.log("Error in collections ");
+           return
+       }
+        res.status(200).json(returnDoc);
+    });
 
-    res.status(200).json(returnData);
+//var returnData = docs;
+//    res.status(200).json(returnData);
 }
 
 module.exports.hotelsGetOne = function(req,res){
