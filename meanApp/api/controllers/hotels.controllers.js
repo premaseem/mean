@@ -3,6 +3,7 @@
  */
 var dbconn = require('../data/dbconnection.js')
 var hotelData = require('../data/hotel-data.json')
+var ObjectId = require('mongodb').ObjectId;
 
 
 module.exports.hotelsGetAll = function(req,res) {
@@ -31,18 +32,22 @@ module.exports.hotelsGetAll = function(req,res) {
         res.status(200).json(returnDoc);
     });
 
-//var returnData = docs;
-//    res.status(200).json(returnData);
 }
 
 module.exports.hotelsGetOne = function(req,res){
     var id = req.params.hotelId
-    var thisHotel = hotelData[id]
-
-    console.log(req.params)
-    console.log(req.query)
     console.log('get one hotel'+id)
-    res.status(200).json(thisHotel);
+
+    var db = dbconn.get();
+    var collection = db.collection('hotels');
+    collection.findOne({'_id' : ObjectId(id)},function(err,returnDoc){
+        if(err){
+            cosole.log("Error in collections ");
+            return
+        }
+        res.status(200).json(returnDoc);
+    });
+
 
 }
 
