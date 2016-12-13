@@ -52,9 +52,26 @@ module.exports.hotelsGetOne = function(req,res){
 }
 
 module.exports.hotelsAddOne = function(req, res) {
-    console.log("POST new hotel and node mon ");
-    console.log(req.body);
-    res
-        .status(200)
-        .json(req.body);
+
+    var db = dbconn.get();
+    var collection = db.collection('hotels');
+    if(req.body && req.body.name && req.body.stars){
+        console.log("POST new hotel and node mon ");
+        console.log(req.body);
+        hotel = req.body;
+        hotel.stars = parseInt(req.body.stars,10);
+        collection.insertOne(hotel,function(err,response){
+            res
+                .status(201)
+                .json(response.ops);
+        });
+
+
+    }else {
+        console.log("error in payload ")
+        res
+            .status(400)
+            .json({"message":"Required data missing from body "})
+    }
+
 };
