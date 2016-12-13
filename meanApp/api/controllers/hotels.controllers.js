@@ -37,23 +37,20 @@ module.exports.hotelsGetOne = function(req,res){
     var id = req.params.hotelId
     console.log('get one hotel'+id)
 
-    var db = dbconn.get();
-    var collection = db.collection('hotels');
-    collection.findOne({'_id' : ObjectId(id)},function(err,returnDoc){
-        if(err){
-            cosole.log("Error in collections ");
-            return
-        }
-        res.status(200).json(returnDoc);
-    });
+    Hotel
+        .findById(id)
+        .exec(function(err,doc){
+        res
+            .status(200)
+            .json(doc);
+    })
 
 
 }
 
 module.exports.hotelsAddOne = function(req, res) {
 
-    var db = dbconn.get();
-    var collection = db.collection('hotels');
+
     if(req.body && req.body.name && req.body.stars){
         console.log("POST new hotel and node mon ");
         console.log(req.body);
