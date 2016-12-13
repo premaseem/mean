@@ -6,6 +6,7 @@ var express = require('express')
 var router = express.Router();
 
 var ctrlHotels = require('../controllers/hotels.controllers')
+var ctrlReviews = require('../controllers/reviews.controllers')
 
 router
     .route('/hotels')
@@ -18,9 +19,9 @@ router.route('/hotels/new')
     .post(ctrlHotels.hotelsAddOne);
 
 router.route('/hotels/:hotelId/reviews')
-    .get(ctrlReviews.hotelsGetAll);
+    .get(ctrlReviews.reviewsGetAll);
 
 router.route('/hotels/:hotelId/reviews/:reviewId')
-    .get(ctrlReviews.hotelsGetOne);
+    .get(ctrlReviews.reviewsGetOne);
 
 module.exports = router
