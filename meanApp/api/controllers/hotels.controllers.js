@@ -25,7 +25,7 @@ module.exports.hotelsGetAll = function(req,res) {
         count = parseInt(req.query.count,10);
     }
 
-    Hotel.find().exec(function(err,hotels){
+    Hotel.find().skip(offset).limit(count).exec(function(err,hotels){
         console.log("Found hotels", hotels.length);
         res.json(hotels)
     })
