@@ -17,4 +17,10 @@ router.route('/hotels/:hotelId')
 router.route('/hotels/new')
     .post(ctrlHotels.hotelsAddOne);
 
+router.route('/hotels/:hotelId/reviews')
+    .get(ctrlReviews.hotelsGetAll);
+
+router.route('/hotels/:hotelId/reviews/:reviewId')
+    .get(ctrlReviews.hotelsGetOne);
+
 module.exports = router
