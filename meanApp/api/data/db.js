@@ -44,4 +44,4 @@ process.on('SIGTERM', function() {
 
 
 // BRING IN YOUR SCHEMAS & MODELS
-require('./hotels.model');
+require('./hotels.model')

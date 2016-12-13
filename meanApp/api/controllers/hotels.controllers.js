@@ -1,15 +1,17 @@
 /**
  * Created by asee2278 on 12/9/16.
  */
-var dbconn = require('../data/dbconnection.js')
-var hotelData = require('../data/hotel-data.json')
-var ObjectId = require('mongodb').ObjectId;
+//var dbconn = require('../data/dbconnection.js')
+//var hotelData = require('../data/hotel-data.json')
+//var ObjectId = require('mongodb').ObjectId;
+
+var mongoose = require('mongoose');
+var Hotel = mongoose.model('Hotel')
+
+
 
 
 module.exports.hotelsGetAll = function(req,res) {
-
-
-    console.log('get all hotels')
 
     console.log(req.query)
     var offset = 1;
@@ -23,14 +25,11 @@ module.exports.hotelsGetAll = function(req,res) {
         count = parseInt(req.query.count,10);
     }
 
-    var db = dbconn.get();
-    docs = db.collection('hotels').find().skip(offset).limit(count).toArray(function(err,returnDoc){
-       if(err){
-           cosole.log("Error in collections ");
-           return
-       }
-        res.status(200).json(returnDoc);
-    });
+    Hotel.find().exec(function(err,hotels){
+        console.log("Found hotels", hotels.length);
+        res.json(hotels)
+    })
+
 
 }
 
